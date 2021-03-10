@@ -1,0 +1,25 @@
+{
+  "global": {
+    "js": [
+      "js/vendors_global_home.js",
+      "js/global.js"
+    ],
+    "css": [
+      "css/global.css"
+    ]
+  },
+  "home": {
+    "js": [
+      "js/vendors_global_home.js",
+      "js/home.js"
+    ]
+  },
+  "admin": {
+    "css": [
+      "css/admin.css"
+    ],
+    "js": [
+      "js/admin.js"
+    ]
+  }
+}

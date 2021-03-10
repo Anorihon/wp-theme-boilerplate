@@ -1,0 +1,178 @@
+@import "include-media.scss";
+
+// =============================================================================
+// String Replace
+// =============================================================================
+
+@function str-replace($string, $search, $replace: "") {
+	$index: str-index($string, $search);
+
+	@if $index {
+		@return str-slice($string, 1, $index - 1) + $replace +
+			str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+	}
+
+	@return $string;
+}
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: woff2 woff ttf) {
+	$src: null;
+
+	$extmods: (
+		eot: "?",
+		svg: "#" + str-replace($name, " ", "_"),
+	);
+
+	$formats: (
+		otf: "opentype",
+		ttf: "truetype",
+	);
+
+	@each $ext in $exts {
+		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+		font-display: swap;
+	}
+}
+
+@mixin svg-ico($name, $width, $height, $bgSize: contain) {
+	width: $width;
+	height: $height;
+	background-repeat: no-repeat;
+	background-image: url("~img/" + $name + ".svg");
+	background-size: $bgSize;
+}
+
+@function rem-calc($size) {
+	$remSize: $size / 16;
+	@return #{$remSize}rem;
+}
+
+@mixin section_adaptation() {
+	@include media("<920px") {
+		display: block;
+
+		> .wrap {
+			display: block;
+			padding-top: $vertical_padding;
+			padding-bottom: 75px;
+		}
+	}
+}
+
+@mixin unset_pos() {
+	top: unset;
+	left: unset;
+	right: unset;
+	bottom: unset;
+}
+
+@function max($numbers...) {
+	@return m#{a}x(#{$numbers});
+}
+
+@function min($numbers...) {
+	@return m#{i}n(#{$numbers});
+}
+
+@mixin flexGap($gap, $direction: row, $element: div) {
+	> #{$element} {
+		@if $direction == row {
+			margin: 0 ($gap / 2);
+
+			&:first-child {
+				margin-left: 0;
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+
+		@if $direction == column {
+			margin: ($gap / 2) 0;
+
+			&:first-child {
+				margin-top: 0;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+@mixin stroke($width, $color) {
+	$shadow: 0 0 0 transparent;
+	$i: 0;
+
+	@while ($i < $width) {
+		$i: $i + 1;
+		$j: 0;
+
+		@while ($j < 2) {
+			$j: $j + 1;
+
+			@for $k from 1 through 3 {
+				$x: 0;
+				$y: 0;
+
+				@if ($k == 1) {
+					$x: $i;
+				}
+
+				@if ($k == 2) {
+					$y: $i;
+				}
+
+				@if ($k == 3) {
+					$x: $i;
+					$y: $i;
+				}
+
+				@if ($j != 1) {
+					$x: $x * (0 - 1);
+					$y: $y * (0 - 1);
+				}
+
+				$shadow: #{$shadow}, #{$x}px #{$y}px 0 $color;
+			}
+		}
+	}
+
+	text-shadow: $shadow;
+
+	@media screen and (-webkit-min-device-pixel-ratio: 0) {
+		text-shadow: none;
+		-webkit-text-stroke: #{$width}px $color;
+	}
+}
+
+@mixin gap($gap) {
+	$column_gap: 0;
+	$row_gap: 0;
+
+	@if type-of($gap) == list {
+		$column_gap: nth($gap, 1);
+		$row_gap: nth($gap, 2);
+	} @else {
+		$column_gap: $gap;
+		$row_gap: $gap;
+	}
+
+	display: flex;
+	margin: calc(#{$row_gap} / -2) calc(#{$column_gap} / -2);
+
+	> * {
+		margin: calc(#{$row_gap} / 2) calc(#{$column_gap} / 2);
+	}
+}

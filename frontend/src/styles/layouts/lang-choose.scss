@@ -1,0 +1,24 @@
+.lang-choose {
+    display: flex;
+    align-items: center;
+
+    @include flexGap(15px, row, "a, span");
+}
+
+.lang-choose > a {
+    font-size: rem-calc(20);
+    line-height: rem-calc(26);
+    color: #a1bad3;
+    text-decoration: none;
+
+    &.active {
+        color: #152743;
+        font-weight: bold;
+        pointer-events: none;
+    }
+}
+
+.lang-choose > .separator{
+    height: 15px;
+    border-right: 1px solid #A1BAD3;
+}

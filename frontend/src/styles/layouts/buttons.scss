@@ -1,0 +1,58 @@
+.buttons {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    @include flexGap(25px, row, "a");
+}
+
+.button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 240px;
+    height: 60px;
+    background: #114699;
+
+    font-weight: bold;
+    font-size: rem-calc(18);
+    line-height: rem-calc(23);
+    color: #ffffff;
+    text-decoration: none;
+
+    transition: background-color 0.5s, color 0.5s;
+
+    cursor: pointer;
+
+    &:hover {
+        background: #1b56b4;
+    }
+
+    &--border-spec {
+        background: transparent;
+        color: #114699;
+        border: 2px solid #114699;
+
+        &:hover {
+            color: #ffffff;
+        }
+    }
+
+    &--border {
+        background: transparent;
+        color: #a1bad3;
+        border: 2px solid #a1bad3;
+        transition: color 0.5s, border-color 0.5s;
+
+        &:hover {
+            background: transparent;
+            color: #114699;
+            border-color: #114699;
+        }
+    }
+
+    @include media("<=tablet") {
+        width: 230px;
+    }
+}

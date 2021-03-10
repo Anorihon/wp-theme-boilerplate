@@ -1,0 +1,10 @@
+@import '_mixins.scss';
+@import '_fonts.scss';
+
+@import './vendor/index.scss';
+
+@import '_reset.scss';
+@import 'animations.scss';
+@import 'global.scss';
+@import 'layouts/index.scss';
+@import 'pages/index.scss';

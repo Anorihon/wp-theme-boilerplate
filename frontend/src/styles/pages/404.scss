@@ -1,0 +1,10 @@
+#page-404 h1 {
+    text-align: center;
+    font-size: rem-calc(250);
+    line-height: rem-calc(250);
+
+    @include media("<=tablet") {
+        font-size: rem-calc(150);
+        line-height: rem-calc(150);
+    }
+}

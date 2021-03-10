@@ -1,0 +1,7 @@
+node_modules/
+languages/
+!frontend/assets
+*.csv
+*.psd
+*.lock
+package-lock.json

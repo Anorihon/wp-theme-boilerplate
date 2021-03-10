@@ -1,0 +1,32 @@
+.breadcrumbs {
+    margin-top: 50px;
+    margin-bottom: 60px;
+}
+
+.breadcrumbs > span {
+    white-space: nowrap;
+}
+
+.breadcrumbs,
+.breadcrumbs a {
+    font-size: rem-calc(16);
+    line-height: rem-calc(21);
+    color: #152743;
+    text-decoration: none;
+}
+
+.breadcrumbs a {
+    transition: color 0.25s;
+}
+
+.breadcrumbs__current,
+.breadcrumbs a:hover {
+    color: #5eb39e;
+}
+
+.breadcrumbs__separator {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 15px;
+    fill: #152743;
+}
